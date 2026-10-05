@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beitrittserklärung – Hörlkofener SV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f5f5;
+    --surface:#ffffff;
+    --surface-alt:#f3eaea;
+    --border:#e3d6d6;
+    --border-strong:#c9b3b3;
+    --text:#241a1a;
+    --text-muted:#6b5a5a;
+    --accent:#ff0000;
+    --accent-strong:#c40000;
+    --accent-soft:#ffe3e3;
+    --accent-contrast:#ffffff;
+    --warn-bg:#fdeeee;
+    --warn-text:#8a1414;
+    --warn-border:#f0c4c4;
+    --danger:#c40000;
+    --focus:#1f6fb2;
+    --shadow: 0 1px 2px rgba(36,26,26,0.06), 0 6px 20px rgba(36,26,26,0.06);
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Work Sans", system-ui, -apple-system, sans-serif;
+    line-height:1.5;
+  }
+  img{ max-width:100%; }
+  h1,h2{ font-weight:700; text-wrap:balance; color:var(--text); margin:0; }
+  .page{ max-width:720px; margin:0 auto; padding-inline:16px; padding-block:28px 64px; display:flex; flex-direction:column; gap:22px; }
+
+  .masthead{ display:flex; align-items:center; gap:18px; }
+  .masthead img{ width:72px; height:auto; flex:none; }
+  .masthead h1{ font-size:clamp(1.4rem, 4vw, 1.9rem); color:var(--accent); }
+  .masthead p{ margin:2px 0 0; color:var(--text-muted); font-size:0.95rem; }
+
+  .lede{ margin:0; color:var(--text-muted); max-width:62ch; }
+
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px; }
+  .muted{ color:var(--text-muted); font-size:0.92rem; margin:0; }
+
+  fieldset{ border:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; }
+  legend{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.07em; font-weight:700; color:var(--accent-strong); padding:0 0 4px 0; border-bottom:1px solid var(--border); width:100%; margin-bottom:4px; }
+  .required-mark{ color:var(--danger); }
+  .field-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .field-grid .span-2{ grid-column:1/-1; }
+  @media (max-width:520px){ .field-grid{ grid-template-columns:1fr; } }
+
+  label{ font-size:0.85rem; font-weight:500; color:var(--text); display:block; margin-bottom:4px; }
+  .field{ display:flex; flex-direction:column; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea{
+    font-family:inherit; font-size:0.95rem; color:var(--text); background:var(--surface);
+    border:1px solid var(--border-strong); border-radius:8px; padding:9px 10px; width:100%;
+  }
+  input:focus-visible, select:focus-visible, textarea:focus-visible{ outline:2px solid var(--focus); outline-offset:1px; }
+  textarea{ min-height:70px; resize:vertical; }
+
+  .checkbox-row{ display:flex; align-items:flex-start; gap:9px; }
+  .checkbox-row input[type="checkbox"], .checkbox-row input[type="radio"]{ margin-top:3px; width:16px; height:16px; accent-color:var(--accent); flex:none; }
+  .checkbox-row label{ font-size:0.9rem; font-weight:400; margin:0; }
+
+  .abteilung-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:480px){ .abteilung-grid{ grid-template-columns:1fr; } }
+  .abteilung-chip{ display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:9px; padding:9px 11px; background:var(--surface-alt); }
+  .abteilung-chip input{ accent-color:var(--accent); width:16px; height:16px; flex:none; }
+  .abteilung-chip label{ margin:0; font-weight:500; font-size:0.9rem; }
+  .tennis-variante-wrap{ grid-column:1/-1; background:var(--surface-alt); border:1px solid var(--border); border-radius:9px; padding:10px 11px; }
+
+  .btn{ font-family:inherit; font-size:0.95rem; font-weight:600; border-radius:9px; padding:11px 18px; border:1px solid transparent; cursor:pointer; }
+  .btn-primary{ background:var(--accent); color:var(--accent-contrast); }
+  .btn-primary:hover{ background:var(--accent-strong); }
+  .btn-secondary{ background:var(--surface); border-color:var(--border-strong); color:var(--text); }
+  .btn-small{ padding:8px 14px; font-size:0.85rem; align-self:flex-start; }
+  .btn-row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+
+  .field-error{ margin:0; font-size:0.82rem; color:var(--danger); }
+  .field-hint{ margin:4px 0 0 0; font-size:0.8rem; min-height:1.1em; color:var(--text-muted); }
+  .field-hint.is-valid{ color:var(--accent-strong); }
+  .field-hint.is-invalid{ color:var(--danger); }
+  .muted.is-warning{ color:var(--danger); font-weight:500; }
+
+  .familienmitglied-liste{ display:flex; flex-direction:column; gap:12px; }
+  .familienmitglied-row{ display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:8px; align-items:end; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .familienmitglied-row:last-child{ border-bottom:none; padding-bottom:0; }
+  @media (max-width:560px){ .familienmitglied-row{ grid-template-columns:1fr 1fr; } .familienmitglied-row .field:nth-child(3){ grid-column:1/-1; } }
+  .familienmitglied-remove{ font-family:inherit; font-size:0.8rem; color:var(--danger); background:none; border:1px solid var(--border-strong); border-radius:7px; padding:9px 12px; cursor:pointer; white-space:nowrap; }
+  .familienmitglied-remove:hover{ background:var(--warn-bg); }
+
+  .confirmation h2{ font-size:1.1rem; color:var(--accent-strong); }
+
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <img src="logo.png" alt="Wappen Hörlkofener SV">
+    <div>
+      <h1>Hörlkofener SV</h1>
+      <p>Beitrittserklärung &amp; SEPA-Mandat – Tennisabteilung</p>
+    </div>
+  </header>
+
+  <p class="lede">Bitte alle Angaben vollständig ausfüllen. Mit dem Absenden geht eine Kopie automatisch an den Hauptverein sowie an die ausgewählte(n) Abteilung(en).</p>
+
+  <form id="beitritt-form" class="card" novalidate
+        action="__WEBAPP_URL__"
+        method="POST" target="submit-frame">
+
+    <fieldset>
+      <legend>Persönliche Angaben</legend>
+      <div class="field-grid">
+        <div class="field">
+          <label for="anrede">Anrede</label>
+          <select id="anrede" name="anrede">
+            <option>Herr</option><option>Frau</option><option>Divers</option>
+          </select>
+        </div>
+        <div class="field"></div>
+        <div class="field">
+          <label for="vorname">Vorname *</label>
+          <input type="text" id="vorname" name="vorname" required>
+        </div>
+        <div class="field">
+          <label for="nachname">Nachname *</label>
+          <input type="text" id="nachname" name="nachname" required>
+        </div>
+        <div class="field span-2">
+          <label for="strasse">Straße, Hausnummer *</label>
+          <input type="text" id="strasse" name="strasse" required>
+        </div>
+        <div class="field">
+          <label for="plz">PLZ *</label>
+          <input type="text" id="plz" name="plz" required inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="ort">Ort *</label>
+          <input type="text" id="ort" name="ort" required>
+        </div>
+        <div class="field">
+          <label for="geburtsdatum">Geburtsdatum *</label>
+          <input type="date" id="geburtsdatum" name="geburtsdatum" required>
+        </div>
+        <div class="field">
+          <label for="eintrittsdatum">Eintrittsdatum *</label>
+          <input type="date" id="eintrittsdatum" name="eintrittsdatum" required>
+        </div>
+        <div class="field">
+          <label for="telefon">Telefon</label>
+          <input type="tel" id="telefon" name="telefon">
+        </div>
+        <div class="field">
+          <label for="email">E-Mail *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mitgliedschaft <span class="required-mark">*</span></legend>
+      <div class="checkbox-row">
+        <input type="radio" name="mitgliedschaftsstatus" id="mitgliedschaft-neu" value="Ich beantrage die Mitgliedschaft im Hörlkofener SV. e. V. Zusätzlich zum Hauptverein möchte ich den folgenden Abteilungen beitreten:" checked required>
+        <label for="mitgliedschaft-neu">Ich beantrage die Mitgliedschaft im Hörlkofener SV. e. V. Zusätzlich zum Hauptverein möchte ich den folgenden Abteilungen beitreten:</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="radio" name="mitgliedschaftsstatus" id="mitgliedschaft-bestehend" value="Ich bin bereits Mitglied im Hauptverein und möchte zusätzlich folgenden Abteilungen beitreten:" required>
+        <label for="mitgliedschaft-bestehend">Ich bin bereits Mitglied im Hauptverein und möchte zusätzlich folgenden Abteilungen beitreten:</label>
+      </div>
+      <div class="abteilung-grid" id="abteilung-checkboxes"></div>
+      <p class="field-error" id="abteilung-error" hidden>Bitte mindestens eine Abteilung auswählen.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Familie</legend>
+      <div class="checkbox-row">
+        <input type="checkbox" id="familienbeitrag-beantragen" name="familienbeitrag" value="Ich beantrage den Familienbeitrag für den Hauptverein in Höhe von 120 € (Partner / Kinder unter 18 im selben Haushalt).">
+        <label for="familienbeitrag-beantragen">Ich beantrage den Familienbeitrag für den Hauptverein in Höhe von 120 € (Partner / Kinder unter 18 im selben Haushalt).</label>
+      </div>
+      <p class="muted" id="familienbeitrag-hinweis">Hinweis: Der Familienbeitrag begrenzt die Beiträge für Familien auf 120 € p.a. und bietet dann einen Vorteil, wenn beide Eltern und mindestens 2 Kinder bzw. Jugendliche Vereinsmitglied sind.</p>
+      <div class="field" id="familienbeitrag-mitglieder-wrap" hidden>
+        <label>Familienmitglieder für den Familienbeitrag</label>
+        <div id="familienmitglieder-liste" class="familienmitglied-liste"></div>
+        <button type="button" class="btn btn-secondary btn-small" id="familienmitglied-add-btn">+ Familienmitglied hinzufügen</button>
+      </div>
+      <input type="hidden" id="familienmitglieder-feld" name="familienmitglieder">
+    </fieldset>
+
+    <fieldset>
+      <legend>Bankverbindung des neuen Mitglieds (SEPA-Lastschrift für den Beitragseinzug)</legend>
+      <div class="field-grid">
+        <div class="field span-2">
+          <label for="kontoinhaber">Kontoinhaber *</label>
+          <input type="text" id="kontoinhaber" name="kontoinhaber" required>
+        </div>
+        <div class="field span-2">
+          <label for="iban">IBAN *</label>
+          <input type="text" id="iban" name="iban" required autocomplete="off" spellcheck="false">
+          <p class="field-hint" id="iban-status"></p>
+        </div>
+        <div class="field">
+          <label for="bic">BIC</label>
+          <input type="text" id="bic" name="bic">
+        </div>
+        <div class="field">
+          <label for="bankname">Bank</label>
+          <input type="text" id="bankname" name="bankname">
+        </div>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="sepa-zustimmung" name="sepaZustimmung" value="Ja, ich erteile das SEPA-Lastschriftmandat." required>
+        <label for="sepa-zustimmung">Ich erteile dem Verein ein SEPA-Lastschriftmandat für den Einzug der Mitgliedsbeiträge von diesem Konto. *</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Hinweise</legend>
+      <div class="checkbox-row">
+        <input type="checkbox" id="austritt-hinweis" name="austrittshinweis" value="bestätigt" required>
+        <label for="austritt-hinweis">Mir ist bekannt, dass ein Austritt aus dem Verein nur zum Jahresende möglich ist. Ein nachträglicher Austritt ist nicht möglich. Ferner ist mir bekannt, dass nicht eingelöste Lastschriften, außer mit der banküblichen Rücklastgebühr, noch mit einer Bearbeitungsgebühr in Höhe von € 5,00 belastet werden. Durch meine Bestätigung erkenne ich die Mitgliedsbeiträge (s.oben), die Satzung und die Geschäftsordnung (s. Startseite) des Vereins an. *</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Einwilligungen (Datenschutz)</legend>
+      <div class="checkbox-row">
+        <input type="checkbox" id="erklaerung-ab" name="erklaerungAB" value="bestätigt" required>
+        <label for="erklaerung-ab"><strong>Erklärung a)+b):</strong> Ich willige ein, dass der Hörlkofener SV, als verantwortliche Stelle, die in der Beitrittserklärung erhobenen personenbezogenen Daten, wie Namen, Vorname, Geburtsdatum, Adresse, E-Mail-Adresse, Telefonnummer und Bankverbindung ausschließlich zum Zwecke der Mitgliederverwaltung, des Beitragseinzuges und der Übermittlung von Vereinsinformationen durch den Verein verarbeitet und genutzt werden. Eine Übermittlung von Teilen dieser Daten an die jeweiligen Sportfachverbände und den Bayerischen Landes-Sportverband e.V. (BLSV) findet nur im Rahmen der in den Satzungen der Fachverbände bzw. des BLSV festgelegten Zwecke statt. Eine Datennutzung für Werbezwecke findet ebenfalls nicht statt. Bei Beendigung der Mitgliedschaft werden die personenbezogenen Daten gelöscht, soweit sie nicht entsprechend den steuerrechtlichen Vorgaben aufbewahrt werden müssen. Neben dem Recht auf Auskunft bezüglich der zu seiner Person bei dem Verantwortlichen Hörlkofener SV gespeicherten Daten hat jedes Mitglied, im Rahmen der Vorgaben der DSGVO, das Recht, der Speicherung der Daten, die nicht im Rahmen der gesetzlichen Vorgaben für bestimmte Zeiträume vorgehalten werden müssen, für die Zukunft zu widersprechen. Ferner hat das Mitglied, im Falle von fehlerhaften Daten, ein Korrekturrecht. Ich willige außerdem ein, dass der Hörlkofener SV meine E-Mail-Adresse und, soweit erhoben, auch meine Telefonnummer zum Zwecke der Kommunikation nutzt. Eine Übermittlung von E-Mail-Adresse und Telefonnummer wird weder an den BLSV oder die Fachverbände noch an Dritte vorgenommen. *</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="erklaerung-c" name="erklaerungC" value="bestätigt" required>
+        <label for="erklaerung-c"><strong>Erklärung c):</strong> Ich willige ein, dass der Hörlkofener SV Bilder von sportbezogenen oder gesellschaftlichen Veranstaltungen auf der Website des Vereines oder sonstigen Vereinspublikationen veröffentlicht und an die Presse zum Zwecke der Veröffentlichung ohne spezielle Einwilligung weitergibt. Abbildungen von genannten Einzelpersonen oder Klein-Gruppen hingegen bedürfen einer Einwilligung der Abgebildeten Personen. *</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Bemerkungen</legend>
+      <div class="field">
+        <label for="bemerkungen">Bemerkungen</label>
+        <textarea id="bemerkungen" name="bemerkungen"></textarea>
+      </div>
+    </fieldset>
+
+    <div class="btn-row">
+      <button type="submit" class="btn btn-primary">Beitrittserklärung absenden</button>
+    </div>
+  </form>
+
+  <div id="confirmation" class="card confirmation" hidden>
+    <h2>Danke – deine Anmeldung wurde übermittelt.</h2>
+    <p class="muted">Der Hauptverein und die ausgewählte(n) Abteilung(en) wurden automatisch per E-Mail benachrichtigt.</p>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="new-entry-btn">Weitere Anmeldung erfassen</button>
+    </div>
+  </div>
+
+  <iframe name="submit-frame" id="submit-frame" hidden title="Formularübermittlung"></iframe>
+
+</div>
+
+<script>
+(function(){
+  var ABTEILUNGEN = [
+    { name: 'Fußball', slug: 'fussball' },
+    { name: 'Gymnastik', slug: 'gymnastik' },
+    { name: 'Ski', slug: 'ski' },
+    { name: 'Tennis', slug: 'tennis' },
+    { name: 'Stockschießen', slug: 'stockschiessen' }
+  ];
+
+  var abteilungCheckboxWrap = document.getElementById('abteilung-checkboxes');
+  var form = document.getElementById('beitritt-form');
+  var confirmation = document.getElementById('confirmation');
+  var newEntryBtn = document.getElementById('new-entry-btn');
+  var submitFrame = document.getElementById('submit-frame');
+
+  ABTEILUNGEN.forEach(function(a){
+    var chip = document.createElement('div');
+    chip.className = 'abteilung-chip';
+    chip.innerHTML =
+      '<input type="checkbox" id="abt-' + a.slug + '" name="abteilungen" value="' + a.name + '">' +
+      '<label for="abt-' + a.slug + '">' + a.name + '</label>';
+    abteilungCheckboxWrap.appendChild(chip);
+
+    if(a.slug === 'tennis'){
+      var tennisWrap = document.createElement('div');
+      tennisWrap.className = 'field tennis-variante-wrap';
+      tennisWrap.id = 'tennis-variante-wrap';
+      tennisWrap.hidden = true;
+      tennisWrap.innerHTML =
+        '<label>Tennis-Mitgliedschaft</label>' +
+        '<div class="checkbox-row"><input type="radio" name="tennisVariante" id="tennis-nur-ich" value="nur für mich" checked><label for="tennis-nur-ich">nur für mich</label></div>' +
+        '<div class="checkbox-row"><input type="radio" name="tennisVariante" id="tennis-ehegattenbeitrag" value="Ehegattenbeitrag"><label for="tennis-ehegattenbeitrag">Ehegattenbeitrag</label></div>';
+      abteilungCheckboxWrap.appendChild(tennisWrap);
+    }
+  });
+
+  var tennisCheckbox = document.getElementById('abt-tennis');
+  var tennisVarianteWrap = document.getElementById('tennis-variante-wrap');
+  tennisCheckbox.addEventListener('change', function(){
+    tennisVarianteWrap.hidden = !tennisCheckbox.checked;
+  });
+
+  function getSelectedAbteilungen(){
+    return ABTEILUNGEN.filter(function(a){ var el = document.getElementById('abt-' + a.slug); return el && el.checked; }).map(function(a){ return a.name; });
+  }
+
+  // --- Familienmitglieder (dynamische Zeilen) ---
+  var familienbeitragCheckbox = document.getElementById('familienbeitrag-beantragen');
+  var familienbeitragMitgliederWrap = document.getElementById('familienbeitrag-mitglieder-wrap');
+  var familienbeitragHinweis = document.getElementById('familienbeitrag-hinweis');
+  var familienmitgliederListe = document.getElementById('familienmitglieder-liste');
+  var familienmitgliedAddBtn = document.getElementById('familienmitglied-add-btn');
+  var familienmitgliederFeld = document.getElementById('familienmitglieder-feld');
+  var familienmitgliedCounter = 0;
+
+  function getFamilienmitglieder(){
+    var rows = familienmitgliederListe.querySelectorAll('.familienmitglied-row');
+    var result = [];
+    rows.forEach(function(row){
+      var id = row.dataset.rowId;
+      var vorname = document.getElementById('fm-vorname-' + id).value.trim();
+      var nachname = document.getElementById('fm-nachname-' + id).value.trim();
+      var geburtsdatum = document.getElementById('fm-geburtsdatum-' + id).value;
+      if(vorname || nachname || geburtsdatum){
+        result.push(vorname + ' ' + nachname + (geburtsdatum ? ', ' + geburtsdatum : ''));
+      }
+    });
+    return result;
+  }
+
+  function updateFamilienbeitragHinweis(){
+    var warnen = familienbeitragCheckbox.checked && getFamilienmitglieder().length < 3;
+    familienbeitragHinweis.classList.toggle('is-warning', warnen);
+  }
+
+  function addFamilienmitgliedRow(){
+    familienmitgliedCounter++;
+    var id = familienmitgliedCounter;
+    var row = document.createElement('div');
+    row.className = 'familienmitglied-row';
+    row.dataset.rowId = String(id);
+    row.innerHTML =
+      '<div class="field"><label for="fm-vorname-' + id + '">Vorname</label><input type="text" id="fm-vorname-' + id + '"></div>' +
+      '<div class="field"><label for="fm-nachname-' + id + '">Nachname</label><input type="text" id="fm-nachname-' + id + '"></div>' +
+      '<div class="field"><label for="fm-geburtsdatum-' + id + '">Geburtsdatum</label><input type="date" id="fm-geburtsdatum-' + id + '"></div>' +
+      '<button type="button" class="familienmitglied-remove">Entfernen</button>';
+    familienmitgliederListe.appendChild(row);
+    row.querySelector('.familienmitglied-remove').addEventListener('click', function(){
+      row.remove();
+      if(familienmitgliederListe.children.length === 0){ addFamilienmitgliedRow(); }
+      updateFamilienbeitragHinweis();
+    });
+    updateFamilienbeitragHinweis();
+  }
+
+  familienmitgliederListe.addEventListener('input', updateFamilienbeitragHinweis);
+  familienmitgliedAddBtn.addEventListener('click', addFamilienmitgliedRow);
+  familienbeitragCheckbox.addEventListener('change', function(){
+    familienbeitragMitgliederWrap.hidden = !familienbeitragCheckbox.checked;
+    if(familienbeitragCheckbox.checked && familienmitgliederListe.children.length === 0){ addFamilienmitgliedRow(); }
+    updateFamilienbeitragHinweis();
+  });
+
+  // --- IBAN-Pruefung + Auto-Fill ---
+  var ibanInput = document.getElementById('iban');
+  var bicInput = document.getElementById('bic');
+  var bankInput = document.getElementById('bankname');
+  var ibanStatus = document.getElementById('iban-status');
+  var blzData = null;
+
+  fetch('blz-data.json').then(function(res){ return res.ok ? res.json() : null; }).then(function(data){
+    blzData = data;
+    if(ibanInput.value){ validateIban(); }
+  }).catch(function(){});
+
+  function mod97Valid(ibanRaw){
+    var iban = ibanRaw.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if(iban.length < 15 || iban.length > 34){ return false; }
+    if(!/^[A-Z]{2}[0-9]{2}[A-Z0-9]+$/.test(iban)){ return false; }
+    var rearranged = iban.slice(4) + iban.slice(0, 4);
+    var numeric = '';
+    for(var i = 0; i < rearranged.length; i++){
+      var ch = rearranged.charAt(i);
+      numeric += /[A-Z]/.test(ch) ? (ch.charCodeAt(0) - 55) : ch;
+    }
+    var remainder = '';
+    for(var j = 0; j < numeric.length; j++){
+      remainder = (parseInt(remainder + numeric.charAt(j), 10) % 97).toString();
+    }
+    return parseInt(remainder, 10) === 1;
+  }
+
+  function formatIban(ibanRaw){
+    var clean = ibanRaw.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    return clean.replace(/(.{4})/g, '$1 ').trim();
+  }
+
+  function validateIban(){
+    var clean = ibanInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if(!clean){ ibanStatus.textContent = ''; ibanStatus.className = 'field-hint'; return; }
+    if(!mod97Valid(clean)){ ibanStatus.textContent = 'IBAN-Prüfziffer ungültig – bitte Angabe kontrollieren.'; ibanStatus.className = 'field-hint is-invalid'; return; }
+    if(clean.slice(0, 2) !== 'DE'){ ibanStatus.textContent = 'IBAN gültig.'; ibanStatus.className = 'field-hint is-valid'; return; }
+    var blz = clean.slice(4, 12);
+    var treffer = blzData ? blzData[blz] : null;
+    if(treffer){
+      bicInput.value = treffer.b || '';
+      bankInput.value = treffer.n + (treffer.o ? (', ' + treffer.o) : '');
+      ibanStatus.textContent = 'IBAN gültig – Bank und BIC automatisch ausgefüllt.';
+      ibanStatus.className = 'field-hint is-valid';
+    } else {
+      ibanStatus.textContent = blzData ? 'IBAN gültig, Bankleitzahl nicht gefunden – bitte Bank/BIC manuell eintragen.' : 'IBAN gültig.';
+      ibanStatus.className = 'field-hint is-valid';
+    }
+  }
+
+  ibanInput.addEventListener('input', function(){
+    var atEnd = ibanInput.selectionStart === ibanInput.value.length;
+    var formatted = formatIban(ibanInput.value);
+    if(atEnd){ ibanInput.value = formatted; }
+    validateIban();
+  });
+  ibanInput.addEventListener('blur', function(){ ibanInput.value = formatIban(ibanInput.value); validateIban(); });
+
+  // --- Absenden ---
+  var ibanErrorBlocked = false;
+  form.addEventListener('submit', function(e){
+    var abteilungen = getSelectedAbteilungen();
+    var abteilungError = document.getElementById('abteilung-error');
+    if(abteilungen.length === 0){
+      e.preventDefault();
+      abteilungError.hidden = false;
+      abteilungError.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+    abteilungError.hidden = true;
+    familienmitgliederFeld.value = familienbeitragCheckbox.checked ? getFamilienmitglieder().join(' | ') : '';
+    // echtes Absenden via verstecktem iFrame; Bestaetigung nach kurzer Verzoegerung zeigen
+    setTimeout(function(){
+      form.hidden = true;
+      confirmation.hidden = false;
+      confirmation.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 600);
+  });
+
+  newEntryBtn.addEventListener('click', function(){
+    form.reset();
+    document.getElementById('eintrittsdatum').value = todayIso();
+    familienbeitragMitgliederWrap.hidden = true;
+    familienmitgliederListe.innerHTML = '';
+    tennisVarianteWrap.hidden = true;
+    ibanStatus.textContent = ''; ibanStatus.className = 'field-hint';
+    form.hidden = false;
+    confirmation.hidden = true;
+  });
+
+  function todayIso(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  document.getElementById('eintrittsdatum').value = todayIso();
+})();
+</script>
+</body>
+</html>
